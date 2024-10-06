@@ -104,7 +104,7 @@ for item in soup.find_all('li', class_='ads-list-photo-item'):
 # for car in cars:
 #     print(car)
 
-test_data = cars[0:30]
+test_data = cars[0:10]
 
 for car in test_data:
     if car['url'] != bad_value:
@@ -146,6 +146,8 @@ def format_and_validate_data(cars_data):
     for car in cars_data:
         print(car)
         if car['name'] is None: # bad data
+            continue
+        if 'token' in car['url']:
             continue
         formatted_car = {
             'name': car['name'],

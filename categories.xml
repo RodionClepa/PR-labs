@@ -3,122 +3,82 @@
   <category>
     <startRange>1000</startRange>
     <endRange>60000</endRange>
-    <totalPrice>55500</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>26000</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
       <car>
-        <name>Mercedes S-Class, 2001 an</name>
-        <price>4500.0</price>
+        <name>Volkswagen Passat, 1997 an</name>
+        <price>26000</price>
         <currency>MDL</currency>
-        <km>500 000 km</km>
-        <url>https://999.md/ro/88566645</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <km>1 km</km>
+        <url>https://999.md/ro/88566759</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
         <type>Vând</type>
-        <views>1</views>
-      </car>
-      <car>
-        <name>Renault Kangoo, 2003 an</name>
-        <price>51000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88000230</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>427</views>
+        <views></views>
       </car>
     </cars>
   </category>
   <category>
     <startRange>60000</startRange>
     <endRange>150000</endRange>
-    <totalPrice>383980</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>0</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
-      <car>
-        <name>Renault Megane, 2015 an</name>
-        <price>135000</price>
-        <currency>MDL</currency>
-        <km>143 000 km</km>
-        <url>https://999.md/ro/87982568</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>246</views>
-      </car>
-      <car>
-        <name>Dacia Sandero, 2012 an</name>
-        <price>119980</price>
-        <currency>MDL</currency>
-        <km>169 000 km</km>
-        <url>https://999.md/ro/86325958</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>720</views>
-      </car>
-      <car>
-        <name>Dacia Dokker, 2014 an</name>
-        <price>129000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/87930959</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>220</views>
-      </car>
     </cars>
   </category>
   <category>
     <startRange>150000</startRange>
     <endRange>250000</endRange>
-    <totalPrice>944960</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>890000</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
       <car>
-        <name>Mercedes B-Class, 2016 an</name>
-        <price>199980</price>
-        <currency>MDL</currency>
-        <km>318 000 km</km>
-        <url>https://999.md/ro/87904000</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>370</views>
-      </car>
-      <car>
-        <name>Volkswagen Touareg, 2007 an</name>
-        <price>199980</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88170419</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>217</views>
-      </car>
-      <car>
         <name>Ford Focus, 2017 an</name>
-        <price>190000</price>
+        <price>215000</price>
         <currency>MDL</currency>
-        <km>196 000 km</km>
-        <url>https://999.md/ro/87371725</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <km>157 000 km</km>
+        <url>https://999.md/ro/86065050</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
         <type>Vând</type>
-        <views>119</views>
+        <views>180</views>
       </car>
       <car>
-        <name>Renault Scenic, 2014 an</name>
-        <price>155000</price>
+        <name>Ford Focus, 2018 an</name>
+        <price>184000</price>
         <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88236681</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <km>214 000 km</km>
+        <url>https://999.md/ro/87024377</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
         <type>Vând</type>
-        <views>69</views>
+        <views>63</views>
       </car>
       <car>
-        <name>Toyota Avensis, 2012 an</name>
-        <price>200000</price>
+        <name>Volvo S60, 2005 an</name>
+        <price>156000</price>
+        <currency>MDL</currency>
+        <km>1 km</km>
+        <url>https://999.md/ro/88566755</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
+        <type>Vând</type>
+        <views>1</views>
+      </car>
+      <car>
+        <name>Ford C-Max, 2017 an</name>
+        <price>152000</price>
         <currency>MDL</currency>
         <km>190 000 km</km>
-        <url>https://999.md/ro/88566637</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
+        <url>https://999.md/ro/88418014</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
+        <type>Vând</type>
+        <views>27</views>
+      </car>
+      <car>
+        <name>Dacia Duster, 2014 an</name>
+        <price>183000</price>
+        <currency>MDL</currency>
+        <km>187 000 km</km>
+        <url>https://999.md/ro/88566745</url>
+        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
         <type>Vând</type>
         <views></views>
       </car>
@@ -127,204 +87,64 @@
   <category>
     <startRange>250000</startRange>
     <endRange>350000</endRange>
-    <totalPrice>3320200</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>279800</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
       <car>
-        <name>Peugeot 3008, 2019 an</name>
-        <price>319800</price>
-        <currency>MDL</currency>
-        <km>137 000 km</km>
-        <url>https://999.md/ro/88033134</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Cumpăr</type>
-        <views>27</views>
-      </car>
-      <car>
-        <name>Peugeot 3008, 2019 an</name>
-        <price>295000</price>
+        <name>Nissan Qashqai, 2014 an</name>
+        <price>279800</price>
         <currency>MDL</currency>
         <km>None</km>
-        <url>https://999.md/ro/17294574</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <url>https://999.md/ro/88555332</url>
+        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
         <type>Vând</type>
-        <views>63</views>
-      </car>
-      <car>
-        <name>Nissan Qashqai, 2018 an</name>
-        <price>291800</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88472577</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>7</views>
-      </car>
-      <car>
-        <name>Renault Kadjar, 2020 an</name>
-        <price>279000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/15975160</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>101</views>
-      </car>
-      <car>
-        <name>Opel Grandland X, 2019 an</name>
-        <price>289000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/87996161</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>81</views>
-      </car>
-      <car>
-        <name>Opel Grandland X, 2020 an</name>
-        <price>297000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/87798527</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>106</views>
-      </car>
-      <car>
-        <name>Renault Kadjar, 2020 an</name>
-        <price>319800</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88130432</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>58</views>
-      </car>
-      <car>
-        <name>Renault Kadjar, 2019 an</name>
-        <price>297000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88432166</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>17</views>
-      </car>
-      <car>
-        <name>Renault Kadjar, 2019 an</name>
-        <price>293000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/86345304</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>214</views>
-      </car>
-      <car>
-        <name>Mercedes E Class, 2013 an</name>
-        <price>339800</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/84729445</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>828</views>
-      </car>
-      <car>
-        <name>Renault Kadjar, 2020 an</name>
-        <price>299000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/83933173</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>191</views>
+        <views>2</views>
       </car>
     </cars>
   </category>
   <category>
     <startRange>350000</startRange>
     <endRange>450000</endRange>
-    <totalPrice>1550000</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>369000</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
       <car>
         <name>Peugeot 3008, 2019 an</name>
-        <price>407000</price>
+        <price>369000</price>
         <currency>MDL</currency>
         <km>None</km>
-        <url>https://999.md/ro/88000526</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <url>https://999.md/ro/88409288</url>
+        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
         <type>Vând</type>
-        <views>43</views>
-      </car>
-      <car>
-        <name>Peugeot 3008, 2019 an</name>
-        <price>375000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/87376442</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>31</views>
-      </car>
-      <car>
-        <name>Seat Ateca</name>
-        <price>370000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/booster/link?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjgyMjIxNjYsIkMiOnsiciI6MSwiYiI6MjAwLCJjIjo2NTgsInoiOjY1OSwiYSI6Ijg0NzUxODA3IiwiaSI6IjE4OC4yNDQuMzAuMTkiLCJzIjoiZGVza3RvcCIsInAiOiJhZHNfbGlzdF9pbmxpbmUiLCJ4IjoiIiwibCI6IjVlNmVhOGExLWMwZjEtNDFhOS05MTM1LTA5NGVkNTZjZjVmZiIsImUiOiIxODguMjQ0LjMwLjE5IiwiZyI6InR1cmJvIiwidCI6IjIwMjQtMTAtMDZUMTI6NDI6NDYuMTQxNTE2NDM2WiJ9fQ.2Yp43EQqaa7QlCD8R1n4lEzgiR8bzX8-khKOzp0JXQI</url>
-        <updateDate>Sunday, October 06, 2024 at 01:18 PM</updateDate>
-        <type>Vând</type>
-        <views>851</views>
-      </car>
-      <car>
-        <name>Lexus ES Series, 2014 an</name>
-        <price>398000</price>
-        <currency>MDL</currency>
-        <km>152 000 km</km>
-        <url>https://999.md/ro/88308294</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>31</views>
+        <views>20</views>
       </car>
     </cars>
   </category>
   <category>
     <startRange>450000</startRange>
     <endRange>99999999</endRange>
-    <totalPrice>1528980</totalPrice>
-    <timestamp>2024-10-06T12:42:54.576981+00:00</timestamp>
+    <totalPrice>1077000</totalPrice>
+    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
     <cars>
       <car>
+        <name>Porsche Macan, 2016 an</name>
+        <price>598000</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/86446341</url>
+        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
+        <type>Vând</type>
+        <views>320</views>
+      </car>
+      <car>
         <name>Volvo XC40, 2021 an</name>
-        <price>499000</price>
+        <price>479000</price>
         <currency>MDL</currency>
         <km>None</km>
-        <url>https://999.md/ro/87529455</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
+        <url>https://999.md/ro/7419957</url>
+        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
         <type>Vând</type>
-        <views>115</views>
-      </car>
-      <car>
-        <name>Tesla Model 3, 2019 an</name>
-        <price>530000</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/87586479</url>
-        <updateDate>Sunday, October 06, 2024 at 03:42 PM</updateDate>
-        <type>Vând</type>
-        <views>223</views>
-      </car>
-      <car>
-        <name>Volvo S90, 2016 an</name>
-        <price>499980</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/86730745</url>
-        <updateDate>Sunday, October 06, 2024 at 03:41 PM</updateDate>
-        <type>Vând</type>
-        <views>446</views>
+        <views>10</views>
       </car>
     </cars>
   </category>
