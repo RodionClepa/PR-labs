@@ -4,17 +4,74 @@ from pprint import pprint  # For pretty print
 import re
 from datetime import datetime, timezone
 from functools import reduce
+import socket
+import ssl
+
+# 1 if use socket, 0 for library
+use_socket = 1
 
 base_url = 'https://999.md'
-url = 'https://999.md/ro/list/transport/cars'
+url = '/ro/list/transport/cars'
+host = '999.md'
 
-response = requests.get(url)
-if response.status_code != 200:
-    raise Exception(f"Fail: {response.status_code}")
+def httpRequestLib(url):
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(f"Fail: {response.status_code}")
 
-html_content = response.text
+    return response.text
 
-soup = BeautifulSoup(html_content, 'html.parser')
+def socketRequest(host, url_path):
+    port = 443  # HTTPS port, server port we try to access
+
+    # Create a TCP socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    context = ssl.create_default_context()
+
+    # Wrap the socket to add SSL (for HTTPS)
+    secure_socket = context.wrap_socket(client_socket, server_hostname=host)
+
+    # Connect to the host on port value
+    secure_socket.connect((host, port))
+
+    # Create the HTTP GET request
+    http_request = f"GET {url_path} HTTP/1.1\r\nHost: {host}\r\nConnection: close\r\n\r\n"
+    # \r\n useed to separate different parts of HTTP request
+    # GET /ro/list/transport/cars 
+    # HTTP/1.1 - The version of the HTTP protocol being used
+    # Host: 999.md
+    # Connection: close - to ensure the server close connection after sending the response
+
+    # Send the request
+    secure_socket.sendall(http_request.encode())
+
+    # Receive the response
+    response_data = b"" # Empty byte string
+    while True:
+        data = secure_socket.recv(4096)  # Receive in chunks of 4096 bytes
+        if not data:
+            break
+        response_data += data
+
+    # Close the socket
+    secure_socket.close()
+
+    # Decode the response (assuming the server uses UTF-8)
+    response_text = response_data.decode('utf-8')
+
+    # Split response into headers and body
+    headers, body = response_text.split("\r\n\r\n", 1) # 1 to split only once
+
+    # Print headers to verify the response
+    print(headers)
+    return body
+
+soup = ""
+if use_socket == 1:
+    soup = BeautifulSoup(socketRequest(host, url), 'html.parser')
+else:
+    soup = BeautifulSoup(httpRequestLib(base_url+url), 'html.parser')
 
 # For none data
 bad_value = None
@@ -111,8 +168,13 @@ def format_price(price):
     return price_cleaned if price_cleaned.isdigit() else None
 
 def format_currency(currency):
+    if currency is None:
+        return None
+
     map_curr = {
-        "€": "EUR"
+        "€": "EUR",
+        "$": "USD",
+        "lei": "MDL"
     }
     print(currency)
     return map_curr[currency]
@@ -186,12 +248,22 @@ categories = [
     },
     {
         "startRange": 150000,
-        "endRange": 500000,
+        "endRange": 250000,
         "cars": []
     },
     {
-        "startRange": 500000,
-        "endRange": 1000000,
+        "startRange": 250000,
+        "endRange": 350000,
+        "cars": []
+    },
+    {
+        "startRange": 350000,
+        "endRange": 450000,
+        "cars": []
+    },
+    {
+        "startRange": 450000,
+        "endRange": 99999999,
         "cars": []
     }
 ]
