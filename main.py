@@ -8,20 +8,20 @@ import socket
 import ssl
 
 # 1 if use socket, 0 for library
-use_socket = 1
+use_socket = 0
 
 base_url = 'https://999.md'
 url = '/ro/list/transport/cars'
 host = '999.md'
 
-def httpRequestLib(url):
+def http_request_lib(url):
     response = requests.get(url)
     if response.status_code != 200:
         raise Exception(f"Fail: {response.status_code}")
 
     return response.text
 
-def socketRequest(host, url_path):
+def socket_request(host, url_path):
     port = 443  # HTTPS port, server port we try to access
 
     # Create a TCP socket
@@ -69,9 +69,9 @@ def socketRequest(host, url_path):
 
 soup = ""
 if use_socket == 1:
-    soup = BeautifulSoup(socketRequest(host, url), 'html.parser')
+    soup = BeautifulSoup(socket_request(host, url), 'html.parser')
 else:
-    soup = BeautifulSoup(httpRequestLib(base_url+url), 'html.parser')
+    soup = BeautifulSoup(http_request_lib(base_url+url), 'html.parser')
 
 # For none data
 bad_value = None
@@ -104,7 +104,7 @@ for item in soup.find_all('li', class_='ads-list-photo-item'):
 # for car in cars:
 #     print(car)
 
-test_data = cars[0:5]
+test_data = cars[0:30]
 
 for car in test_data:
     if car['url'] != bad_value:
@@ -144,8 +144,11 @@ def format_and_validate_data(cars_data):
     formatted_data = []
 
     for car in cars_data:
+        print(car)
+        if car['name'] is None: # bad data
+            continue
         formatted_car = {
-            'name': car.get('name', bad_value).strip(),
+            'name': car['name'],
             'price': format_price(car['price']),
             'currency': format_currency(car['currency']),
             'km': format_km(car['km']),
@@ -287,3 +290,85 @@ for category in categories:
     print(f"{category['timestamp']} - Total Price: {category['totalPrice']} MDL")
     for car in category['cars']:
         pprint(car)
+
+def serialize_categories_to_json(categories_data):
+    json_output = '['
+    for category in categories_data:
+        json_output += '{'
+        json_output += f'"startRange": {category["startRange"]}, '
+        json_output += f'"endRange": {category["endRange"]}, '
+        json_output += f'"totalPrice": {category["totalPrice"] if category["totalPrice"] is not None else 0}, '
+        json_output += f'"timestamp": "{category["timestamp"]}", '
+        json_output += '"cars": ['
+
+        for i, car in enumerate(category["cars"]):
+            json_output += '{'
+            json_output += f'"name": "{car["name"]}", '
+            json_output += f'"price": {car["price"]}, '
+            json_output += f'"currency": "{car["currency"]}", '
+            json_output += f'"km": "{car["km"]}", '
+            json_output += f'"url": "{car["url"]}", '
+            json_output += f'"updateDate": "{car["updateDate"]}", '
+            json_output += f'"type": "{car["type"]}", '
+            json_output += f'"views": "{car["views"]}"'
+            json_output += '}'
+            if i < len(category["cars"]) - 1:
+                json_output += ', '
+
+        json_output += ']'
+        json_output += '}'
+        if category != categories_data[-1]:
+            json_output += ', '
+    
+    json_output += ']'
+    return json_output
+
+# JSON
+json_categories_data = serialize_categories_to_json(categories)
+with open('categories.json', 'w', encoding='utf-8') as file:
+    file.write(json_categories_data)
+
+# JSON validator
+# https://jsonformatter.curiousconcept.com/#
+print("JSON Categories Output:")
+print(json_categories_data)
+
+# XML
+def serialize_categories_to_xml(categories_data):
+    xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n<categories>\n'
+
+    for category in categories_data:
+        xml_output += '  <category>\n'
+        xml_output += f'    <startRange>{category["startRange"]}</startRange>\n'
+        xml_output += f'    <endRange>{category["endRange"]}</endRange>\n'
+        xml_output += f'    <totalPrice>{category["totalPrice"] if category["totalPrice"] is not None else 0}</totalPrice>\n'
+        xml_output += f'    <timestamp>{category["timestamp"]}</timestamp>\n'
+        xml_output += '    <cars>\n'
+
+        for car in category["cars"]:
+            xml_output += '      <car>\n'
+            xml_output += f'        <name>{car["name"]}</name>\n'
+            xml_output += f'        <price>{car["price"]}</price>\n'
+            xml_output += f'        <currency>{car["currency"]}</currency>\n'
+            xml_output += f'        <km>{car["km"]}</km>\n'
+            xml_output += f'        <url>{car["url"]}</url>\n'
+            xml_output += f'        <updateDate>{car["updateDate"]}</updateDate>\n'
+            xml_output += f'        <type>{car["type"]}</type>\n'
+            xml_output += f'        <views>{car["views"]}</views>\n'
+            xml_output += '      </car>\n'
+
+        xml_output += '    </cars>\n'
+        xml_output += '  </category>\n'
+
+    xml_output += '</categories>'
+    return xml_output
+
+
+xml_categories_data = serialize_categories_to_xml(categories)
+with open('categories.xml', 'w', encoding='utf-8') as file:
+    file.write(xml_categories_data)
+
+# XML validator
+# https://jsonformatter.org/xml-viewer
+print("XML Categories Output:")
+print(xml_categories_data)
