@@ -3,18 +3,18 @@
   <category>
     <startRange>1000</startRange>
     <endRange>60000</endRange>
-    <totalPrice>26000</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <totalPrice>29980</totalPrice>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
       <car>
-        <name>Volkswagen Passat, 1997 an</name>
-        <price>26000</price>
+        <name>Renault Megane, 2016 an</name>
+        <price>29980</price>
         <currency>MDL</currency>
-        <km>1 km</km>
-        <url>https://999.md/ro/88566759</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
+        <km>155 000 km</km>
+        <url>https://999.md/ro/88567001</url>
+        <updateDate>Sunday, October 06, 2024 at 04:18 PM</updateDate>
         <type>Vând</type>
-        <views></views>
+        <views>3</views>
       </car>
     </cars>
   </category>
@@ -22,129 +22,109 @@
     <startRange>60000</startRange>
     <endRange>150000</endRange>
     <totalPrice>0</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
     </cars>
   </category>
   <category>
     <startRange>150000</startRange>
     <endRange>250000</endRange>
-    <totalPrice>890000</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <totalPrice>246000</totalPrice>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
       <car>
-        <name>Ford Focus, 2017 an</name>
-        <price>215000</price>
+        <name>Skoda Octavia, 2019 an</name>
+        <price>246000</price>
         <currency>MDL</currency>
-        <km>157 000 km</km>
-        <url>https://999.md/ro/86065050</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
+        <km>147 000 km</km>
+        <url>https://999.md/ro/87569292</url>
+        <updateDate>Sunday, October 06, 2024 at 04:18 PM</updateDate>
         <type>Vând</type>
-        <views>180</views>
-      </car>
-      <car>
-        <name>Ford Focus, 2018 an</name>
-        <price>184000</price>
-        <currency>MDL</currency>
-        <km>214 000 km</km>
-        <url>https://999.md/ro/87024377</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
-        <type>Vând</type>
-        <views>63</views>
-      </car>
-      <car>
-        <name>Volvo S60, 2005 an</name>
-        <price>156000</price>
-        <currency>MDL</currency>
-        <km>1 km</km>
-        <url>https://999.md/ro/88566755</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
-        <type>Vând</type>
-        <views>1</views>
-      </car>
-      <car>
-        <name>Ford C-Max, 2017 an</name>
-        <price>152000</price>
-        <currency>MDL</currency>
-        <km>190 000 km</km>
-        <url>https://999.md/ro/88418014</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
-        <type>Vând</type>
-        <views>27</views>
-      </car>
-      <car>
-        <name>Dacia Duster, 2014 an</name>
-        <price>183000</price>
-        <currency>MDL</currency>
-        <km>187 000 km</km>
-        <url>https://999.md/ro/88566745</url>
-        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
-        <type>Vând</type>
-        <views></views>
+        <views>233</views>
       </car>
     </cars>
   </category>
   <category>
     <startRange>250000</startRange>
     <endRange>350000</endRange>
-    <totalPrice>279800</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <totalPrice>0</totalPrice>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
-      <car>
-        <name>Nissan Qashqai, 2014 an</name>
-        <price>279800</price>
-        <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/88555332</url>
-        <updateDate>Sunday, October 06, 2024 at 03:54 PM</updateDate>
-        <type>Vând</type>
-        <views>2</views>
-      </car>
     </cars>
   </category>
   <category>
     <startRange>350000</startRange>
     <endRange>450000</endRange>
-    <totalPrice>369000</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <totalPrice>1109800</totalPrice>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
       <car>
-        <name>Peugeot 3008, 2019 an</name>
-        <price>369000</price>
+        <name>Citroen C5 Aircross, 2019 an</name>
+        <price>385000</price>
         <currency>MDL</currency>
         <km>None</km>
-        <url>https://999.md/ro/88409288</url>
-        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
+        <url>https://999.md/ro/88028701</url>
+        <updateDate>Sunday, October 06, 2024 at 04:19 PM</updateDate>
         <type>Vând</type>
-        <views>20</views>
+        <views>65</views>
+      </car>
+      <car>
+        <name>Citroen C5 Aircross, 2021 an</name>
+        <price>359800</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/87420940</url>
+        <updateDate>Sunday, October 06, 2024 at 04:19 PM</updateDate>
+        <type>Vând</type>
+        <views>131</views>
+      </car>
+      <car>
+        <name>Citroen C5 Aircross, 2019 an</name>
+        <price>365000</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/87758847</url>
+        <updateDate>Sunday, October 06, 2024 at 04:19 PM</updateDate>
+        <type>Vând</type>
+        <views>103</views>
       </car>
     </cars>
   </category>
   <category>
     <startRange>450000</startRange>
     <endRange>99999999</endRange>
-    <totalPrice>1077000</totalPrice>
-    <timestamp>2024-10-06T12:54:50.571717+00:00</timestamp>
+    <totalPrice>2260000</totalPrice>
+    <timestamp>2024-10-06T13:19:44.937190+00:00</timestamp>
     <cars>
       <car>
-        <name>Porsche Macan, 2016 an</name>
-        <price>598000</price>
+        <name>Skoda Superb, 2019 an</name>
+        <price>566000</price>
         <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/86446341</url>
-        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
+        <km>55 500 km</km>
+        <url>https://999.md/ro/86536374</url>
+        <updateDate>Sunday, October 06, 2024 at 04:19 PM</updateDate>
         <type>Vând</type>
-        <views>320</views>
+        <views>351</views>
       </car>
       <car>
-        <name>Volvo XC40, 2021 an</name>
-        <price>479000</price>
+        <name>Audi A7, 2013 an</name>
+        <price>556000</price>
         <currency>MDL</currency>
-        <km>None</km>
-        <url>https://999.md/ro/7419957</url>
-        <updateDate>Sunday, October 06, 2024 at 03:53 PM</updateDate>
+        <km>140 000 km</km>
+        <url>https://999.md/ro/80192303</url>
+        <updateDate>Sunday, October 06, 2024 at 04:18 PM</updateDate>
+        <type>Schimb</type>
+        <views>962</views>
+      </car>
+      <car>
+        <name>BMW X7, 2019 an</name>
+        <price>1138000</price>
+        <currency>MDL</currency>
+        <km>161 000 km</km>
+        <url>https://999.md/ro/87569782</url>
+        <updateDate>Sunday, October 06, 2024 at 04:18 PM</updateDate>
         <type>Vând</type>
-        <views>10</views>
+        <views>216</views>
       </car>
     </cars>
   </category>

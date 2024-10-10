@@ -374,3 +374,67 @@ with open('categories.xml', 'w', encoding='utf-8') as file:
 # https://jsonformatter.org/xml-viewer
 print("XML Categories Output:")
 print(xml_categories_data)
+
+# CUSTOM serialization
+def serialize_categories_custom(categories_data):
+    output = ""
+    
+    for category in categories_data:
+        category_str = f"{{startRange|{category['startRange']}|endRange|{category['endRange']}|totalPrice|{category['totalPrice'] if category['totalPrice'] is not None else 0}|timestamp|{category['timestamp']}|cars:"
+        
+        cars_str = ""
+        for car in category["cars"]:
+            car_str = f"<name|{car['name']}|price|{car['price']}|currency|{car['currency']}|km|{car['km']}|url|{car['url']}|updateDate|{car['updateDate']}|type|{car['type']}|views|{car['views']}>"
+            cars_str += car_str
+        
+        category_str += cars_str + "}\n"
+        output += category_str
+    
+    return output
+
+def deserialize_categories_custom(serialized_data):
+    categories = []
+    category_blocks = serialized_data.split('}\n')
+    
+    for category_block in category_blocks:
+        if not category_block.strip():
+            continue
+        
+        category_part, cars_part = category_block[1:].split('|cars:')
+        
+        category_fields = category_part.split('|')
+        category_dict = {
+            'startRange': int(category_fields[1]),
+            'endRange': int(category_fields[3]),
+            'totalPrice': int(category_fields[5]),
+            'timestamp': category_fields[7],
+            'cars': []
+        }
+        
+        car_blocks = cars_part.split('>')
+        
+        for car_block in car_blocks:
+            if not car_block.strip():
+                continue
+            
+            car_fields = car_block[1:].split('|')
+            car_dict = {}
+            for i in range(0, len(car_fields), 2):
+                car_dict[car_fields[i]] = car_fields[i + 1]
+            
+            category_dict['cars'].append(car_dict)
+        
+        categories.append(category_dict)
+    
+    return categories
+
+
+serialized_data = serialize_categories_custom(categories)
+
+with open('categories_custom.txt', 'w', encoding='utf-8') as file:
+    file.write(serialized_data)
+
+deserialized_data = deserialize_categories_custom(serialized_data)
+
+print("Deserialized Data Custom:")
+pprint(deserialized_data)
