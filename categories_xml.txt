@@ -1,0 +1,150 @@
+<categories>
+  <category>
+    <startRange>1000</startRange>
+    <endRange>60000</endRange>
+    <totalPrice>0</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+    </cars>
+  </category>
+  <category>
+    <startRange>60000</startRange>
+    <endRange>150000</endRange>
+    <totalPrice>125000</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+      <car>
+        <name>Skoda Fabia, 2013 an</name>
+        <price>125000</price>
+        <currency>MDL</currency>
+        <km>218 400 km</km>
+        <url>https://999.md/ro/88634645</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views></views>
+      </car>
+    </cars>
+  </category>
+  <category>
+    <startRange>150000</startRange>
+    <endRange>250000</endRange>
+    <totalPrice>395000</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+      <car>
+        <name>Renault Scenic, 2015 an</name>
+        <price>176000</price>
+        <currency>MDL</currency>
+        <km>163 400 km</km>
+        <url>https://999.md/ro/87961615</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>112</views>
+      </car>
+      <car>
+        <name>Renault Kadjar, 2017 an</name>
+        <price>219000</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/86931322</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>355</views>
+      </car>
+    </cars>
+  </category>
+  <category>
+    <startRange>250000</startRange>
+    <endRange>350000</endRange>
+    <totalPrice>1199400</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+      <car>
+        <name>Volkswagen Tiguan, 2011 an</name>
+        <price>266000</price>
+        <currency>MDL</currency>
+        <km>154 000 km</km>
+        <url>https://999.md/ro/88046280</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>14</views>
+      </car>
+      <car>
+        <name>Renault Kadjar, 2019 an</name>
+        <price>319800</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/87760658</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>48</views>
+      </car>
+      <car>
+        <name>Renault Kadjar, 2020 an</name>
+        <price>313800</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/86675375</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>126</views>
+      </car>
+      <car>
+        <name>Peugeot 3008, 2019 an</name>
+        <price>299800</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/87950397</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>40</views>
+      </car>
+    </cars>
+  </category>
+  <category>
+    <startRange>350000</startRange>
+    <endRange>450000</endRange>
+    <totalPrice>778800</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+      <car>
+        <name>Nissan Qashqai, 2021 an</name>
+        <price>409800</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/87887424</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>58</views>
+      </car>
+      <car>
+        <name>Peugeot 5008, 2018 an</name>
+        <price>369000</price>
+        <currency>MDL</currency>
+        <km>None</km>
+        <url>https://999.md/ro/86325100</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>143</views>
+      </car>
+    </cars>
+  </category>
+  <category>
+    <startRange>450000</startRange>
+    <endRange>99999999</endRange>
+    <totalPrice>539000</totalPrice>
+    <timestamp>2024-10-13T08:44:26.269846+00:00</timestamp>
+    <cars>
+      <car>
+        <name>Toyota Rav 4, 2020 an</name>
+        <price>539000</price>
+        <currency>MDL</currency>
+        <km>89 000 km</km>
+        <url>https://999.md/ro/88466003</url>
+        <updateDate>Sunday, October 13, 2024 at 11:44 AM</updateDate>
+        <type>Vând</type>
+        <views>40</views>
+      </car>
+    </cars>
+  </category>
+</categories>

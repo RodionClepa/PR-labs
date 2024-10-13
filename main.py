@@ -8,7 +8,7 @@ import socket
 import ssl
 
 # 1 if use socket, 0 for library
-use_socket = 0
+use_socket = 1
 
 base_url = 'https://999.md'
 url = '/ro/list/transport/cars'
@@ -327,7 +327,7 @@ def serialize_categories_to_json(categories_data):
 
 # JSON
 json_categories_data = serialize_categories_to_json(categories)
-with open('categories.json', 'w', encoding='utf-8') as file:
+with open('categories_json.txt', 'w', encoding='utf-8') as file:
     file.write(json_categories_data)
 
 # JSON validator
@@ -337,7 +337,7 @@ print(json_categories_data)
 
 # XML
 def serialize_categories_to_xml(categories_data):
-    xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n<categories>\n'
+    xml_output = '<categories>\n'
 
     for category in categories_data:
         xml_output += '  <category>\n'
@@ -367,7 +367,7 @@ def serialize_categories_to_xml(categories_data):
 
 
 xml_categories_data = serialize_categories_to_xml(categories)
-with open('categories.xml', 'w', encoding='utf-8') as file:
+with open('categories_xml.txt', 'w', encoding='utf-8') as file:
     file.write(xml_categories_data)
 
 # XML validator
@@ -380,11 +380,26 @@ def serialize_categories_custom(categories_data):
     output = ""
     
     for category in categories_data:
-        category_str = f"{{startRange|{category['startRange']}|endRange|{category['endRange']}|totalPrice|{category['totalPrice'] if category['totalPrice'] is not None else 0}|timestamp|{category['timestamp']}|cars:"
+        category_str = (
+            f"{{startRange?int|{category['startRange']}|"
+            f"endRange?int|{category['endRange']}|"
+            f"totalPrice?int|{category['totalPrice'] if category['totalPrice'] is not None else 0}|"
+            f"timestamp?str|{category['timestamp']}|"
+            f"cars?list|"
+        )
         
         cars_str = ""
         for car in category["cars"]:
-            car_str = f"<name|{car['name']}|price|{car['price']}|currency|{car['currency']}|km|{car['km']}|url|{car['url']}|updateDate|{car['updateDate']}|type|{car['type']}|views|{car['views']}>"
+            car_str = (
+                f"<name?str|{car['name']}|"
+                f"price?float|{car['price']}|"
+                f"currency?str|{car['currency']}|"
+                f"km?str|{car['km']}|"
+                f"url?str|{car['url']}|"
+                f"updateDate?str|{car['updateDate']}|"
+                f"type?str|{car['type']}|"
+                f"views?int|{car['views']}>"
+            )
             cars_str += car_str
         
         category_str += cars_str + "}\n"
@@ -392,41 +407,59 @@ def serialize_categories_custom(categories_data):
     
     return output
 
+def cast_value(value_type, value):
+    if value_type == "int":
+        return int(value)
+    elif value_type == "float":
+        return float(value)
+    elif value_type == "str":
+        return value
+    elif value_type == "list":
+        return value
+    return value
+
 def deserialize_categories_custom(serialized_data):
     categories = []
-    category_blocks = serialized_data.split('}\n')
-    
-    for category_block in category_blocks:
-        if not category_block.strip():
-            continue
+    category_pattern = r"\{startRange\?(\w+)\|([^\|]+)\|endRange\?(\w+)\|([^\|]+)\|totalPrice\?(\w+)\|([^\|]+)\|timestamp\?(\w+)\|([^\|]+)\|cars\?(\w+)\|(.*?)\}"
+    car_pattern = r"<name\?(\w+)\|([^\|]+)\|price\?(\w+)\|([^\|]+)\|currency\?(\w+)\|([^\|]+)\|km\?(\w+)\|([^\|]+)\|url\?(\w+)\|([^\|]+)\|updateDate\?(\w+)\|([^\|]+)\|type\?(\w+)\|([^\|]+)\|views\?(\w+)\|([^\>]+)>"
+
+    # Find all categories
+    category_matches = re.findall(category_pattern, serialized_data)
+
+    for match in category_matches:
+        start_range_type, start_range_value, end_range_type, end_range_value, total_price_type, total_price_value, timestamp_type, timestamp_value, cars_type, cars_str = match
         
-        category_part, cars_part = category_block[1:].split('|cars:')
-        
-        category_fields = category_part.split('|')
-        category_dict = {
-            'startRange': int(category_fields[1]),
-            'endRange': int(category_fields[3]),
-            'totalPrice': int(category_fields[5]),
-            'timestamp': category_fields[7],
-            'cars': []
+        category = {
+            "startRange": cast_value(start_range_type, start_range_value),
+            "endRange": cast_value(end_range_type, end_range_value),
+            "totalPrice": cast_value(total_price_type, total_price_value),
+            "timestamp": cast_value(timestamp_type, timestamp_value),
+            "cars": []
         }
-        
-        car_blocks = cars_part.split('>')
-        
-        for car_block in car_blocks:
-            if not car_block.strip():
-                continue
-            
-            car_fields = car_block[1:].split('|')
-            car_dict = {}
-            for i in range(0, len(car_fields), 2):
-                car_dict[car_fields[i]] = car_fields[i + 1]
-            
-            category_dict['cars'].append(car_dict)
-        
-        categories.append(category_dict)
-    
+
+        # Find all cars in the current category
+        car_matches = re.findall(car_pattern, cars_str)
+
+        for car_match in car_matches:
+            (name_type, name_value, price_type, price_value, currency_type, currency_value, km_type, km_value,
+             url_type, url_value, update_date_type, update_date_value, type_type, type_value, views_type, views_value) = car_match
+
+            car = {
+                "name": cast_value(name_type, name_value),
+                "price": cast_value(price_type, price_value),
+                "currency": cast_value(currency_type, currency_value),
+                "km": cast_value(km_type, km_value),
+                "url": cast_value(url_type, url_value),
+                "updateDate": cast_value(update_date_type, update_date_value),
+                "type": cast_value(type_type, type_value),
+                "views": cast_value(views_type, views_value)
+            }
+            category["cars"].append(car)
+
+        categories.append(category)
+
     return categories
+
 
 
 serialized_data = serialize_categories_custom(categories)
