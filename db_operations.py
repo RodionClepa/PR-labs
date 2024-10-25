@@ -1,0 +1,81 @@
+import psycopg2
+
+import psycopg2
+import psycopg2.extras
+from datetime import datetime
+
+dbname = 'prlabrodion'
+user = 'postgres'
+password = 'postgres'
+
+def get_connection():
+    try:
+        conn = psycopg2.connect(f"dbname={dbname} user={user} password={password} host='localhost'")
+        return conn
+    except psycopg2.Error as e:
+        print(f"Database connection error: {e}")
+        return None
+
+def execute_query(query, params=None):
+    conn = None
+    cur = None
+    try:
+        conn = get_connection()
+        if conn is not None:
+            cur = conn.cursor()
+            cur.execute(query, params)
+            conn.commit()
+            if query.strip().upper().startswith('SELECT'):
+                return cur.fetchall() 
+    except psycopg2.Error as e:
+        print(f"Error executing query: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+
+def create_cars_table():
+    query = """
+    CREATE TABLE IF NOT EXISTS cars (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        price DECIMAL(10, 2) NOT NULL,
+        currency VARCHAR(3) NOT NULL,
+        km VARCHAR(50),  -- Use VARCHAR to accommodate values like 'None'
+        url TEXT NOT NULL UNIQUE,
+        update_date TIMESTAMP NOT NULL,
+        type VARCHAR(50) NOT NULL,  -- e.g., 'Vând' for selling
+        views INTEGER NOT NULL DEFAULT 0
+    );
+    """
+    execute_query(query)
+
+def insert_car(name, price, currency, km, url, update_date, type, views):
+    query = """
+    INSERT INTO cars (name, price, currency, km, url, update_date, type, views)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    params = (name, price, currency, km, url, update_date, type, views)
+    execute_query(query, params)
+
+def insert_multiple_cars(car_list):
+    query = """
+    INSERT INTO cars (name, price, currency, km, url, update_date, type, views)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (url) DO NOTHING  -- Avoid duplicate entries
+    """
+    conn = None
+    try:
+        conn = get_connection()
+        if conn is not None:
+            cur = conn.cursor()
+            psycopg2.extras.execute_batch(cur, query, car_list)
+            conn.commit()
+            print(f"Inserted {len(car_list)} cars successfully.")
+    except psycopg2.Error as e:
+        print(f"Error inserting cars: {e}")
+    finally:
+        if conn:
+            conn.close()
