@@ -30,7 +30,6 @@ def car_in_dict(car):
     }
     return car_dict
 
-
 def formatting_cars_json(cars):
     car_list = []
     for car in cars:

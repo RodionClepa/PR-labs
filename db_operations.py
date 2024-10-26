@@ -118,3 +118,8 @@ def update_car(fields, values):
             return bad_request, f"Error updating car: {e}"
     except Exception as e:
         return bad_request, f"Error updating car: {e}"
+
+def get_paginated_cars(page, size):
+    offset = (page - 1) * size
+    query = "SELECT * FROM cars ORDER BY id LIMIT %s OFFSET %s"
+    return execute_query(query, (size, offset))

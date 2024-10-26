@@ -1,5 +1,5 @@
 from datetime import datetime
-from db_operations import get_all_cars, get_car_by_id, insert_car, create_cars_table, insert_multiple_cars, update_car
+from db_operations import get_all_cars, get_car_by_id, get_paginated_cars, insert_car, create_cars_table, insert_multiple_cars, update_car
 import json
 import socket
 from router_functions import delete_car, formatting_cars_json, car_in_dict, post_car, take_updated_fields
@@ -89,6 +89,31 @@ def routing(method, routes, params):
             return bad_request, "ID is not Provided"
         response_status, response_body = delete_car(params["id"])
         return response_status, response_body
+
+    elif method == "GET" and route == "pagination":
+        page = 1
+        size = 5
+        if params.get('page') is not None:
+            try:
+                page = int(params['page'])
+                if page < 1:
+                    return bad_request, "Page must be > 1"
+            except ValueError:
+                return bad_request, "Page must be integer"
+        if params.get('size') is not None:
+            try:
+                size = int(params['size'])
+                if size < 1:
+                    return bad_request, "Size must be > 1"
+            except ValueError:
+                return bad_request, "Size must be integer"
+        
+        cars = get_paginated_cars(page, size)
+        
+        if not cars:
+            return ok_request, json.dumps([])
+        
+        return ok_request, json.dumps(formatting_cars_json(cars), default=str)
     else:
         return None, None
 
