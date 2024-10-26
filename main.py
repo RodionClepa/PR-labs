@@ -2,8 +2,9 @@ from datetime import datetime
 from db_operations import get_all_cars, get_car_by_id, get_paginated_cars, insert_car, create_cars_table, insert_multiple_cars, update_car
 import json
 import socket
-from router_functions import delete_car, formatting_cars_json, car_in_dict, post_car, take_updated_fields
+from router_functions import delete_car, formatting_cars_json, car_in_dict, parse_multipart_form_data, post_car, take_updated_fields
 from urllib.parse import unquote
+from pprint import pprint
 
 bad_request = 400
 ok_request = 200
@@ -53,7 +54,7 @@ def parse_request(request_data):
         print(f"Error parsing request: {e}")
         return None, None, None
 
-def routing(method, routes, params):
+def routing(method, routes, params, request_data):
     route = "/".join(routes)
     if method == "GET" and route == "hello":
         return ok_request, "Hello World"
@@ -114,6 +115,13 @@ def routing(method, routes, params):
             return ok_request, json.dumps([])
         
         return ok_request, json.dumps(formatting_cars_json(cars), default=str)
+    
+    elif method == "POST" and route == "json":
+        print("-------------------------JSON FORM DATA---------------------------------")
+        form_data = parse_multipart_form_data(request_data)
+        for data in form_data:
+            pprint(data)
+        return 200, json.dumps(form_data, default=str)
     else:
         return None, None
 
@@ -128,14 +136,24 @@ def run_server(host='localhost', port=8080):
         client_socket, client_address = server_socket.accept()
         print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
 
-        # Receive and print the client's request data
-        request_data = client_socket.recv(1024).decode('utf-8')
+        request_data = b"" # Empty byte string
+        while True:
+            data = client_socket.recv(4096)
+            if not data:
+                break
+            request_data += data
+            if data.endswith(b'\r\n\r\n'):
+                if b'multipart/form-data' not in request_data:
+                    break
+            if b'--\r\n' in data:
+                break
+        request_data = request_data.decode('utf-8')
         print(f"Received Request:\n{request_data}")
 
         method, segments_route, query_params = parse_request(request_data)
 
         if segments_route != None and segments_route[0] != 'favicon.ico':
-            status, response_body = routing(method, segments_route, query_params)
+            status, response_body = routing(method, segments_route, query_params, request_data)
             
             if response_body is None:
                 response = "HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n404 Not Found"

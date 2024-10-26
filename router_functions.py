@@ -1,6 +1,9 @@
 from datetime import datetime
 
 from db_operations import car_exists, execute_query
+import os
+import json
+from io import BytesIO
 
 expected_types = {
     "name": str,
@@ -106,3 +109,23 @@ def delete_car(car_id):
         return ok_request, f"Car with ID {car_id} deleted successfully"
     else:
         return bad_request, "Something went wrong"
+
+
+def parse_multipart_form_data(request_data):
+    index_start_content = request_data.find('Content-Disposition:')
+    right_part = request_data[index_start_content:]
+    end_content = right_part.find("----------------------------")
+    lines = right_part.splitlines()
+    json_files = []
+    json_content = ""
+    for line in lines:
+        if line.startswith("Content-Disposit") or line.startswith("Content-Type") or line.startswith("---------"):
+            if json_content != "":
+                json_files.append(json_content)
+                json_content = ""
+            continue
+        json_content += line
+    
+    
+    json_files = list(map(json.loads, json_files))
+    return json_files
