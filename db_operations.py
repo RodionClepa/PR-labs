@@ -8,6 +8,9 @@ dbname = 'prlabrodion'
 user = 'postgres'
 password = 'postgres'
 
+bad_request = 400
+ok_request = 200
+
 def get_connection():
     try:
         conn = psycopg2.connect(f"dbname={dbname} user={user} password={password} host='localhost'")
@@ -25,8 +28,11 @@ def execute_query(query, params=None):
             cur = conn.cursor()
             cur.execute(query, params)
             conn.commit()
-            if query.strip().upper().startswith('SELECT'):
-                return cur.fetchall() 
+            if query.strip().upper().startswith(('INSERT', 'UPDATE', 'DELETE')):
+                return cur.rowcount
+            elif query.strip().upper().startswith('SELECT'):
+                return cur.fetchall()
+
     except psycopg2.Error as e:
         print(f"Error executing query: {e}")
     finally:
@@ -79,3 +85,36 @@ def insert_multiple_cars(car_list):
     finally:
         if conn:
             conn.close()
+
+def get_all_cars():
+    query = "SELECT * FROM cars;"
+    return execute_query(query)
+
+def get_car_by_id(car_id):
+    query = "SELECT * FROM cars WHERE id = %s;"
+    return execute_query(query, (car_id,))
+
+def car_exists(car_id):
+    query = "SELECT 1 FROM cars WHERE id = %s"
+    result = execute_query(query, (car_id,))
+    print("***Exists***")
+    print(result)
+    return result
+
+def update_car(fields, values):
+    car_id = values[len(values) - 1] 
+    result = car_exists(car_id)
+    if not result:
+        return bad_request, "No such id"
+    query = f"UPDATE cars SET {', '.join(fields)} WHERE id = %s"
+
+    try:
+        result = execute_query(query, tuple(values))
+        print("***Update***")
+        print(result)
+        if result is not None and result > 0:
+            return ok_request, f"Car with ID {car_id} updated successfully"
+        else:
+            return bad_request, f"Error updating car: {e}"
+    except Exception as e:
+        return bad_request, f"Error updating car: {e}"

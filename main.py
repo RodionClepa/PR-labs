@@ -1,10 +1,13 @@
 from datetime import datetime
-from db_operations import insert_car
-from db_operations import create_cars_table
-from db_operations import insert_multiple_cars
+from db_operations import get_all_cars, get_car_by_id, insert_car, create_cars_table, insert_multiple_cars, update_car
 import json
 import socket
-from urllib.parse import urlparse, parse_qs
+from router_functions import delete_car, formatting_cars_json, car_in_dict, post_car, take_updated_fields
+from urllib.parse import unquote
+
+bad_request = 400
+ok_request = 200
+
 
 create_cars_table()
 
@@ -29,6 +32,66 @@ def load_cars_from_json(filename):
         return car_list
     
 
+def parse_request(request_data):
+    try:
+        request_line = request_data.splitlines()[0]
+        method, path, _ = request_line.split()
+        print(f"Method: {method}, Path: {path}")
+        segments_route = path.split('/')[1:]  # Split the path into segments
+        query_params = {}
+        
+        # Check for query parameters in the path
+        if '?' in segments_route[-1]:
+            segments_route[-1], query_string = segments_route[-1].split('?')
+            for param in query_string.split('&'):
+                key, value = param.split('=')
+                query_params[unquote(key)] = unquote(value)
+        
+        print(f"Segments: {segments_route}, Query Params: {query_params}")
+        return method, segments_route, query_params
+    except Exception as e:
+        print(f"Error parsing request: {e}")
+        return None, None, None
+
+def routing(method, routes, params):
+    route = "/".join(routes)
+    if method == "GET" and route == "hello":
+        return ok_request, "Hello World"
+    elif method == "GET" and route == "":
+        if params.get('id') is None:
+            cars = get_all_cars()
+            return ok_request,json.dumps(formatting_cars_json(cars), default=str)
+        
+        car = get_car_by_id(params["id"])
+        if len(car) == 0:
+            return bad_request, "No such ID"
+        return ok_request, json.dumps(formatting_cars_json(car), default=str)
+    
+    elif method == "PUT" and route == "":
+        if params.get('id') is None:
+            return bad_request, "ID is not Provided"
+        
+        fields, values = take_updated_fields(params['id'], params)
+        
+        if not fields:
+            return bad_request, "No valid fields provided for update"
+        
+        response_status, response_body = update_car(fields, values)
+        print(response_body)
+        return response_status, response_body
+    
+    elif method == "POST" and route == "":
+        response_status, response_body = post_car(params)
+        return response_status, response_body
+    
+    elif method == "DELETE" and route == "":
+        if params.get('id') is None:
+            return bad_request, "ID is not Provided"
+        response_status, response_body = delete_car(params["id"])
+        return response_status, response_body
+    else:
+        return None, None
+
 def run_server(host='localhost', port=8080):
     # Create a socket that uses IPv4 and TCP
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,8 +107,17 @@ def run_server(host='localhost', port=8080):
         request_data = client_socket.recv(1024).decode('utf-8')
         print(f"Received Request:\n{request_data}")
 
-        # Construct an HTTP response
-        response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello, World!"
+        method, segments_route, query_params = parse_request(request_data)
+
+        if segments_route != None and segments_route[0] != 'favicon.ico':
+            status, response_body = routing(method, segments_route, query_params)
+            
+            if response_body is None:
+                response = "HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n404 Not Found"
+            else:
+                response = f"HTTP/1.1 {status} OK\r\nContent-Type: application/json\r\n\r\n" + response_body
+        else:
+            response = "HTTP/1.1 204 No Content\r\n\r\n" # Handle favicon
         
         # Send the HTTP response back to the client
         client_socket.sendall(response.encode('utf-8'))
