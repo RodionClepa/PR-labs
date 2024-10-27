@@ -206,6 +206,7 @@ async def chat_handler(websocket: WebSocketServerProtocol, path):
                     await websocket.send(json.dumps({"message": f"Joined room '{room_name}'"}))
                     print(f"User joined room {room_name}")
                 else:
+                    room_name = None
                     await websocket.send(json.dumps({"message": "Room does not exist"}))
             
             elif action == "create" and not room_name:
