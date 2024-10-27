@@ -1,9 +1,13 @@
 from datetime import datetime
+import threading
 from db_operations import get_all_cars, get_car_by_id, get_paginated_cars, insert_car, create_cars_table, insert_multiple_cars, update_car
 import json
 import socket
-from router_functions import delete_car, formatting_cars_json, car_in_dict, parse_multipart_form_data, post_car, take_updated_fields
+from router_functions import delete_car, formatting_cars_json, car_in_dict, parse_multipart_form_data, post_car, take_raw_json, take_updated_fields
 from urllib.parse import unquote
+import asyncio
+import json
+from websockets import WebSocketServerProtocol, serve
 from pprint import pprint
 
 bad_request = 400
@@ -11,6 +15,7 @@ ok_request = 200
 
 
 create_cars_table()
+chat_rooms = {}
 
 def load_cars_from_json(filename):
     """Loads car data from a JSON file and formats it for insertion."""
@@ -116,6 +121,22 @@ def routing(method, routes, params, request_data):
         
         return ok_request, json.dumps(formatting_cars_json(cars), default=str)
     
+    elif method == "GET" and route == "join":
+        return ok_request, json.dumps("Join a chat room by connecting via WebSocket", default=str)
+    
+    elif method == "GET" and route == "rooms":
+        room_list = list(chat_rooms.keys())
+        return ok_request, json.dumps(f"'rooms': {room_list}", default=str)
+    
+    elif method == "POST" and route == "create_room":
+        result = take_raw_json(request_data)
+        room_name = result['room']
+        if chat_rooms.get(room_name) is not None:
+            return bad_request, json.dumps({"message": f"Room '{room_name}' already created"}, default=str)
+        chat_rooms[room_name] = []
+        return ok_request, json.dumps({"message": f"Room '{room_name}' created"}, default=str)
+    
+    
     elif method == "POST" and route == "json":
         print("-------------------------JSON FORM DATA---------------------------------")
         form_data = parse_multipart_form_data(request_data)
@@ -142,11 +163,12 @@ def run_server(host='localhost', port=8080):
             if not data:
                 break
             request_data += data
-            if data.endswith(b'\r\n\r\n'):
-                if b'multipart/form-data' not in request_data:
-                    break
+            if b'multipart/form-data' not in request_data:
+                break
+            print(data)
             if b'--\r\n' in data:
                 break
+        
         request_data = request_data.decode('utf-8')
         print(f"Received Request:\n{request_data}")
 
@@ -168,8 +190,77 @@ def run_server(host='localhost', port=8080):
         # Close the client socket
         client_socket.close()
 
+# WebSocket Server Handler
+async def chat_handler(websocket: WebSocketServerProtocol, path):
+    room_name = None
 
-run_server()
+    try:
+        async for message in websocket:
+            data = json.loads(message)
+            action = data.get("action")
+
+            if action == "join":
+                room_name = data.get("room")
+                if room_name in chat_rooms:
+                    chat_rooms[room_name].append(websocket)
+                    await websocket.send(json.dumps({"message": f"Joined room '{room_name}'"}))
+                    print(f"User joined room {room_name}")
+                else:
+                    await websocket.send(json.dumps({"message": "Room does not exist"}))
+            
+            elif action == "create" and not room_name:
+                new_room = data.get('room')
+                if chat_rooms.get(new_room) is not None:
+                    return await websocket.send(json.dumps({"message": f"Room '{new_room}' already created"}, default=str))
+                chat_rooms[new_room] = []
+                await websocket.send(json.dumps({"message": f"Room '{new_room}' created"}, default=str))
+            
+            elif action == "rooms":
+                room_list = list(chat_rooms.keys())
+                await websocket.send(json.dumps({"rooms": room_list}))
+                    
+            elif action == "message" and room_name:
+                message_text = data.get("message")
+                if message_text:
+                    await broadcast(room_name, message_text, websocket)
+
+            elif action == "leave" and room_name:
+                await leave_room(room_name, websocket)
+                room_name = None
+                await websocket.send(json.dumps({"message": "Left the room"}))
+
+    finally:
+        if room_name:
+            await leave_room(room_name, websocket)
+
+async def broadcast(room, message, sender):
+    #Broadcast a message to all users in the room except the sender
+    if room in chat_rooms:
+        message_data = json.dumps({"message": message})
+        for user in chat_rooms[room]:
+            if user != sender:
+                await user.send(message_data)
+
+async def leave_room(room, websocket):
+    if room in chat_rooms:
+        chat_rooms[room].remove(websocket)
+        print(f"User left room {room}")
+
+# Run WebSocket Server in Thread
+def start_websocket_server(port=8090):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(serve(chat_handler, "localhost", port))
+    loop.run_forever()
+
+
+http_thread = threading.Thread(target=run_server)
+http_thread.start()
+websocket_thread = threading.Thread(target=start_websocket_server)
+websocket_thread.start()
+
+websocket_thread.join()
+http_thread.join()
 
 # cars_list = load_cars_from_json('cars.json')
 

@@ -129,3 +129,7 @@ def parse_multipart_form_data(request_data):
     
     json_files = list(map(json.loads, json_files))
     return json_files
+
+def take_raw_json(request_data):
+    lines = request_data.splitlines()
+    return json.loads(lines[-1])
