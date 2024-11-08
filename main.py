@@ -37,6 +37,9 @@ def load_cars_from_json(filename):
             ))
         return car_list
     
+cars_list = load_cars_from_json('cars.json')
+
+insert_multiple_cars(cars_list)
 
 def parse_request(request_data):
     try:
@@ -146,7 +149,7 @@ def routing(method, routes, params, request_data):
     else:
         return None, None
 
-def run_server(host='localhost', port=8080):
+def run_server(host='0.0.0.0', port=8080):
     # Create a socket that uses IPv4 and TCP
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
@@ -251,7 +254,7 @@ async def leave_room(room, websocket):
 def start_websocket_server(port=8090):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(serve(chat_handler, "localhost", port))
+    loop.run_until_complete(serve(chat_handler, "0.0.0.0", port))
     loop.run_forever()
 
 
@@ -262,10 +265,6 @@ websocket_thread.start()
 
 websocket_thread.join()
 http_thread.join()
-
-# cars_list = load_cars_from_json('cars.json')
-
-# insert_multiple_cars(cars_list)
 
 # Example data
 # name = "Mercedes GLE Coupe, 2016 an"

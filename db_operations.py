@@ -4,16 +4,24 @@ import psycopg2
 import psycopg2.extras
 from datetime import datetime
 
-dbname = 'prlabrodion'
-user = 'postgres'
-password = 'postgres'
+dbname = 'my_db'
+user = 'my_user'
+password = '12345'
+host = 'host.docker.internal'
+port = 5438
 
 bad_request = 400
 ok_request = 200
 
 def get_connection():
     try:
-        conn = psycopg2.connect(f"dbname={dbname} user={user} password={password} host='localhost'")
+        conn = psycopg2.connect(
+            user=user,
+            password=password,
+            host=host,
+            port=port,
+            dbname=dbname
+        )
         return conn
     except psycopg2.Error as e:
         print(f"Database connection error: {e}")
