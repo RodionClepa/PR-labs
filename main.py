@@ -220,29 +220,3 @@ for i in range(0, number_nodes):
 
 for node in node_list:
     node.start()
-
-# node_1 = Node('127.0.0.1', list_nodes[0], "Leader")
-# node_1.set_role(NodeRole.LEADER)
-
-# node_2 = Node('127.0.0.1', list_nodes[1], "Follower")
-# node_2.set_role(NodeRole.FOLLOWER)
-
-# node_3 = Node('127.0.0.1', list_nodes[2], "Ion")
-# node_3.set_role(NodeRole.FOLLOWER)
-
-# node_4 = Node('127.0.0.1', list_nodes[3], "Third")
-# node_4.set_role(NodeRole.FOLLOWER)
-
-# node_5 = Node('127.0.0.1', list_nodes[4], "Five")
-# node_5.set_role(NodeRole.FOLLOWER)
-
-# node_6 = Node('127.0.0.1', list_nodes[5], "Six")
-# node_6.set_role(NodeRole.FOLLOWER)
-
-# node_1.start()
-# node_2.start()
-# node_3.start()
-# node_4.start()
-# node_5.start()
-# node_6.start()
-
